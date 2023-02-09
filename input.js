@@ -15,7 +15,12 @@ export default function Meme() {
         bottomText: "",
         randomImage: "http://i.imgflip.com/1bij.jpg" 
     })
-    const [allMemeImages, setAllMemeImages] = React.useState(memesData)
+    const [allMemeImages, setAllMemeImages] = React.useState()
+    React.useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+        .then(res => res.json())
+        .then(data => setAllMemeImages(data))
+    },[meme.randomImage])
      function changeMemeText(event){
          var {value,type,name,chceked} = event.target
             setMeme(prevMeme => {
